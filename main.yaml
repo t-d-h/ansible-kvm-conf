@@ -1,0 +1,58 @@
+- name: Create kvm node
+  hosts: kvm
+
+  tasks: 
+    - name: "apt update"
+      apt:
+        update_cache: yes
+
+    - name: Install necessary packages
+      apt:
+        name: "{{  item  }}"
+        state: latest
+      loop:
+        - curl
+        - gnupg
+        - telnet
+        - iotop
+        - iftop
+        - net-tools
+        - virt-manager
+        - qemu-kvm
+        - libvirt-clients
+        - libvirt-daemon-system
+        - bridge-utils
+        - virtinst
+        - libvirt-daemon
+        - libguestfs-tools
+
+    - name: remove useless packages in cache
+      apt:
+        autoclean: yes
+
+    - name: add vhost_net
+      command: modprobe vhost_net
+
+    - name: config bridge network
+      template:
+        src: interfaces.j2
+        dest: /etc/network/interfaces
+        force: yes
+
+    - name: restart network config
+      systemd:
+        name: networking
+        daemon_reload: yes
+        state: started
+        enabled: yes
+
+    - name: create ssh key
+      openssh_keypair:
+        path: /root/.ssh/id_ssh_rsa
+
+    - name: create VM folder
+      command: mkdir /ssd /hdd /nvme
+
+    - name: Reboot host, wait for 3 mins. . .
+      reboot:
+        reboot_timeout: 180
