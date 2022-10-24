@@ -25,6 +25,7 @@
         - virtinst
         - libvirt-daemon
         - libguestfs-tools
+        - ansible
 
     - name: remove useless packages in cache
       apt:
