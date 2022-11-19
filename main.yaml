@@ -69,4 +69,3 @@
     - name: Connect to new port (5002)
       set_fact:
         ansible_port: 5002
- 
