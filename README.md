@@ -3,4 +3,4 @@ Install and config kvm on Debian11
 
 #############
 Run:
-ansible-playbook main.yaml -i inventory
+ansible-playbook main.yaml -i inventory -D
