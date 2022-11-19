@@ -46,7 +46,19 @@
         daemon_reload: yes
         state: started
         enabled: yes
-
+        
+    - name: Copy ssh config 
+      ansible.builtin.copy:
+        src: sshd.conf
+        dest: /etc/ssh/sshd.conf
+        owner: root
+        group: root
+        mode: '0644'
+        
+   - name: Change ssh port to 8888
+    set_fact:
+      ansible_port: 8888
+      
     - name: create ssh key
       openssh_keypair:
         path: /root/.ssh/id_ssh_rsa
