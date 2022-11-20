@@ -3,4 +3,4 @@ Install and config kvm on Debian11
 
 #############
 Run:
-ansible-playbook main.yaml -i inventory -D
+ansible-playbook main.yaml -i inventory -D -e 'ansible_python_interpreter=/usr/bin/python3'
