@@ -47,8 +47,8 @@
         state: started
         enabled: yes
         
-   - name: Copy ssh config
-      ansible.builtin.copy:
+    - name: Copy ssh config
+      copy:
         src: sshd.conf
         dest: /etc/ssh/sshd_config
         owner: root
