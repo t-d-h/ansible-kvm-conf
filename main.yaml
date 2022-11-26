@@ -60,7 +60,7 @@
         path: /root/.ssh/id_ssh_rsa
 
     - name: create VM folder
-      command: mkdir /ssd /hdd /nvme
+      command: mkdir /ssd /hdd /nvme /sftp
 
     - name: Reboot host, wait for 3 mins. . .
       reboot:
