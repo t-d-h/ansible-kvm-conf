@@ -47,6 +47,16 @@
         state: started
         enabled: yes
         
+    - name: Mask sleep.target 
+      systemd:
+        name: "{{  item  }}"
+        masked: yes
+      loop:
+        - sleep.target
+        - suspend.target
+        - hibernate.target
+        - hybrid-sleep.target
+        
     - name: Copy ssh config
       copy:
         src: sshd.conf
