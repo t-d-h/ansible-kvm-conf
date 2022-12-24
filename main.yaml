@@ -70,8 +70,11 @@
         path: /root/.ssh/id_ssh_rsa
 
     - name: create VM folder
-      command: mkdir /ssd /hdd /nvme /sftp
+      command: mkdir /ssd /hdd /nvme
 
+    - name: create crontab
+      command: crontab -l > mycron && echo "*/2 * * * * /root/cloudflare.sh >> /root/crontab_cloudflare && crontab mycron $$ rm -f mycron
+    
     - name: Reboot host, wait for 3 mins. . .
       reboot:
         reboot_timeout: 180
